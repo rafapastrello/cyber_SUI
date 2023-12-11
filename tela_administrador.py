@@ -20,8 +20,8 @@ def menu_administrador():
     _____________________ OPÇÕES ____________________
 
     [v] .................... Voltar ao menu principal
-    [1] .................... 
-    [2] .................... 
+    [1] .................... Visualizar solicitacoes
+    [2] .................... Editar clientes
     [3] .................... 
 *********************************************************
 
@@ -31,15 +31,18 @@ def menu_administrador():
             break
         elif opcao == '1':
             print('\n -  - \n')
-            funcao()
+            visualizar_solicitacoes()
         elif opcao == '2':
             print('\n -  - \n')
-            funcao()
-        elif opcao == '3':
-            print('\n -   - \n')
-            funcao()
+            editar_clientes()
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
+
+def visualizar_solicitacoes():
+    pass
+
+def editar_clientes():
+    pass
 
 if __name__ == '__main__':
     menu_administrador()

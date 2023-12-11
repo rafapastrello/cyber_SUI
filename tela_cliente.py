@@ -20,9 +20,8 @@ def menu_cliente():
     _____________________ OPÇÕES ____________________
 
     [v] .................... Voltar ao menu principal
-    [1] .................... 
-    [2] .................... 
-    [3] .................... 
+    [1] ........................... Enviar reclamação
+    [2] ........................ Consultar reclamação
 *********************************************************
 
 >>> Digite a opção: """)
@@ -31,15 +30,18 @@ def menu_cliente():
             break
         elif opcao == '1':
             print('\n -  - \n')
-            funcao()
+            enviar_reclamacao()
         elif opcao == '2':
             print('\n -  - \n')
-            funcao()
-        elif opcao == '3':
-            print('\n -   - \n')
-            funcao()
+            consultar_reclamacao()
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
+
+def enviar_reclamacao():
+    pass
+
+def consultar_reclamacao():
+    pass
 
 if __name__ == '__main__':
     menu_cliente()
