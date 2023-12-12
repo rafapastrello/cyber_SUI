@@ -26,13 +26,16 @@ def menu_cliente():
 ********************************************************* """)
         if menu == '1':
             # Cliente informa que possui cadastro, então digita o CPF para verificarmos se é existente no banco de dados, se não, ele recebe a mensagem de CPF inexistente
-            print('\n >>> Informe seu CPF: \n')
-            break
+            cpf_cliente = input('\n >>> Informe seu CPF: \n')
+            if cpf_cliente ...
+                
+            else:
+                print('\n - CPF INVÁLIDO!!! - \n')
         elif menu == '2':
             # Ao informar que o cliente não possui cadastro, ele é redirecionado para a função 'menu_cadastro_cliente'
             menu_cadastro_cliente()
         else:
-            print('\n - CPF INEXISTENTE!!! - \n')
+            print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
 def menu_cadastro_cliente():
     """
