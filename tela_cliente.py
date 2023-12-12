@@ -21,22 +21,38 @@ def menu_cliente():
     _________________ LOGIN CLIENTE _________________
 
         Digite [1] para cliente já logado
-        Digite [2] para cadastrar login do cliente
+        Digite [2] para cliente sem login
         
 ********************************************************* 
 
 >>> Digite a opção: """)
         if menu == '1':
             # Cliente informa que possui cadastro, então digita o CPF para verificarmos se é existente no banco de dados, se não, ele recebe a mensagem de CPF inexistente
-            cpf_cliente = input('\n >>> Informe seu CPF: ')
-            if cpf_cliente:
-                pass
-                
+            cpf_cliente = input('\n>>> Informe seu CPF: ')
+
+            verifica_cpf_cliente = cursor.execute('SELECT cpf_cliente FROM clientes WHERE cpf_cliente = ?',(cpf_cliente))
+            nome_cliente_logado = cursor.execute('SELECT nome_cliente FROM clientes WHERE cpf_cliente = ?',(cpf_cliente))
+
+            if verifica_cpf_cliente != None:
+                print(f'\n - LOGADO COMO > {nome_cliente_logado} < !!! - \n')
+                menu_solicitacao_cliente()
             else:
-                print('\n - CPF INVÁLIDO!!! - \n')
+                print('\n - CPF INEXISTENTE!!! - \n')
         elif menu == '2':
-            # Ao informar que o cliente não possui cadastro, ele é redirecionado para a função 'menu_cadastro_cliente' para realizar seu cadastro
-            menu_cadastro_cliente()
+            # Ao informar que o cliente não possui cadastro, ele decide se quer ser cadastrado ou não
+            opcao = input("""
+***********************************************
+    ____ DESEJA REALIZAR SEU CADASTRO? ____
+
+            Digite [1] para SIM
+            Digite [2] para NÃO
+*********************************************** 
+
+>>> Digite a opção: """)
+            if opcao == '1':
+                menu_cadastro_cliente()
+            if opcao == '2':
+                menu_cliente()
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
@@ -68,6 +84,7 @@ def menu_cadastro_cliente():
             nome_cliente = input('Digite seu nome completo: ') 
             telefone_cliente = input('Digite seu telefone: ')
             print(f'\n - CLIENTE > {nome_cliente} < CADASTRADO - \n')
+            menu_cliente()
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
