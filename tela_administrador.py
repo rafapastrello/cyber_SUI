@@ -163,8 +163,8 @@ def menu_administrador():
     __________________ OPÇÕES __________________
 
     [v] .............. Voltar ao menu principal
-    [1] .............. Visualizar solicitacoes
-    [2] .............. Visualizar servições
+    [1] .............. Visualizar solicitações
+    [2] .............. Visualizar serviços
     [3] .............. Criar serviço
     [4] .............. Editar serviço
     [5] .............. Deletar serviço
@@ -178,20 +178,29 @@ def menu_administrador():
             print('\n - VOLTANDO AO MENU PRINCIPAL!!! - \n')
             break
         elif opcao == '1':
-            print('\n -  - \n')
+            print('\n - VISUALIZAR SOLICITAÇÕES - \n')
             visualizar_solicitacoes_administrador()
         elif opcao == '2':
-            print('\n -  - \n')
+            print('\n - VISUALIZAR SERVIÇOS - \n')
             visualizar_servico_administrador()
         elif opcao == '3':
+            print('\n - CRIAR SERVIÇO - \n')
             cadastrar_servico_administrador(id_usuario)
         elif opcao == '4':
-            print('\n -  - \n')
+            print('\n - EDITAR SERVIÇO - \n')
             editar_servico_administrador()
         elif opcao == '5':
+            print('\n - DELETAR SERVIÇO - \n')
             excluir_servico_administrador()
         elif opcao == '6':
+            print('\n - VISUALIZAR HISTÓRICO - \n')
+            ...
+        elif opcao == '7':
+            print('\n - MODIFICAR PERFIL - \n')
             listar_modificacao_administrador()
+        elif opcao == '7':
+            print('\n - VISUALIZAR RANK - \n')
+            ...
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 

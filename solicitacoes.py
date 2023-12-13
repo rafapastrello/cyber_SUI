@@ -15,17 +15,29 @@ def enviar_solicitacao():
     """
 
     while True:
-        print("""
+        opcao = input("""
 *********************************************************
     ______________ DADOS DA SOLICITAÇÃO _____________
 
-    [v] ...................................... Voltar
-    [1] .......................... DESCRICAO solicitação
-    [2] ....................... ENDERECO solicitação
+    Digite [1] para voltar
+    Digite [2] para continuar à solicitação
 *********************************************************
-""")
-        descricao_solicitacao = input('Digite a descrição do problema: ')
-        endereco_solicitacao = input('Digite o endereço do problema: ')
+
+>>> Digite a opção: """)
+        if opcao == '1':
+            print('\n - VOLTANDO AO MENU DE OPÇÕES!!! - \n')
+            break
+        elif opcao == '2':
+            descricao_solicitacao = input('Digite a DESCRICAO do problema: ')
+            endereco_solicitacao = input('Digite o ENDERECO do problema: ')
+            cursor.execute('INSERT INTO clientes VALUES (null,?,?,null,null)',(descricao_solicitacao,endereco_solicitacao,))
+            conexao_db.commit()
+            print(f'\n - SOLICITAÇÃO FEITA!!! - \n')
+        else:
+            print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
 def consultar_solicitacao():
     pass
+
+if __name__ == '__main__':
+    enviar_solicitacao()
