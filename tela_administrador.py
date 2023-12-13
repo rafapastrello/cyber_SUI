@@ -6,11 +6,13 @@ conexao_db = sqlite3.connect('cyber_solucoes.db')
 # Cria um cursor para executar comandos SQL
 cursor = conexao_db.cursor()
 
+# ***** ADMINISTRADOR  *****
+
 def cadastrar_administrador():
     global id_usuario
 
     print( " (1) login            (2) Criar conta")
-    print('='*8)
+    print('='*20)
     entrada = input("escolha:")
 
     while( entrada!= '1' and entrada!='2' ):
@@ -38,8 +40,11 @@ def cadastrar_administrador():
             id_usuario = cursor.lastrowid
             conexao_db.commit()
             break
+        
 
-#MODIFICAÇÕES -----------
+  
+
+# **** MODIFICAÇÕES *****
 
 # Insere os valores em modificação ( Como se fosse um histórico do adminstrador )
 
@@ -62,7 +67,7 @@ def listar_modificacao_administrador():
         modificacao = list(resultado)
         print(f"|{modificacao[0]:<3}|{modificacao[1]:<20}|{modificacao[2]:<30}|{modificacao[3]:<20}|")
 
-#SERVIÇÕES
+# ***** SERVIÇÕS *****
 
 def cadastrar_servico_administrador():
     nome_servico = input("Digite o nome do serviço:")
@@ -90,9 +95,9 @@ def editar_servico_administrador():
 
 def excluir_servico_administrador():
 
-    id_serviço = input("Digite o id do serviço:")
+    id_servico = input("Digite o id do serviço:")
 
-    cursor.execute(" DELETE FROM servico WHERE id_servico = ?",(id_serviço))
+    cursor.execute(" DELETE FROM servico WHERE id_servico = ?",(id_servico))
     print('-'*50)
     print(' ESSE SERVIÇO FOI DELETADO')
     conexao_db.commit()
@@ -117,7 +122,8 @@ def visualizar_servico_administrador():
         print(f"|{servico[0]:<3}|{servico[1]:<20}|{servico[2]:<20}|")
 
 
-#SOLICITAÇÃO
+#***** SOLICITAÇÃO *****
+
 
 # Obter os valores da tabela solicitação
 
@@ -147,6 +153,10 @@ def visualizar_solicitacoes_administrador():
     for solicitacao in ver_solicitacao:
         
         print(f"| {solicitacao[0]:<3} | {solicitacao[1]:<20} | {solicitacao[2]:<20} | {solicitacao[3]:<20} |{solicitacao[4]:<20} |{solicitacao[5]:<20} |")
+        
+# Função para ver o rankin
+
+cursor.execute(" SELECT ")
 
 def menu_administrador():
     cadastrar_administrador()
@@ -192,8 +202,10 @@ def menu_administrador():
             excluir_servico_administrador()
         elif opcao == '6':
             listar_modificacao_administrador()
+        elif opcao == '8':
+            pass
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     menu_administrador()
