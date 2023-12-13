@@ -15,9 +15,7 @@ def enviar_solicitacao():
     """
 
     while True:
-        
-
-        opcao = input("""
+        print("""
 *********************************************************
     ______________ DADOS DA SOLICITAÇÃO _____________
 
@@ -25,19 +23,9 @@ def enviar_solicitacao():
     [1] .......................... DESCRICAO solicitação
     [2] ....................... ENDERECO solicitação
 *********************************************************
-
->>> Digite a opção: """)
-        if opcao == 'v':
-            print('\n - VOLTANDO AO MENU PRINCIPAL!!! - \n')
-            break
-        elif opcao == '1':
-            print('\n - ENVIAR SOLICITAÇÃO - \n')
-            enviar_solicitacao()
-        elif opcao == '2':
-            print('\n - CONSULTAR SOLICITAÇÃO - \n')
-            consultar_solicitacao()
-        else:
-            print('\n - OPÇÃO INVÁLIDA!!! - \n')
+""")
+        descricao_solicitacao = input('Digite a descrição do problema: ')
+        endereco_solicitacao = input('Digite o endereço do problema: ')
 
 def consultar_solicitacao():
     pass

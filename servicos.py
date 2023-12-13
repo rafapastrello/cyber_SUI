@@ -16,7 +16,6 @@ def requisitar_servico():
         print("Escolha inválida. Por favor, tente novamente.")
         return None, None
 
-
 # Lista para armazenar os serviços escolhidos junto com os endereços
 lista_servicos_enderecos = []
 
