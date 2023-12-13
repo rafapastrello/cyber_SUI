@@ -74,7 +74,7 @@ def menu_cadastro_cliente():
 *********************************************************
     __________________ CADASTRE-SE __________________
 
-        Digite [1] para voltar ao menu de cadastramento
+        Digite [1] para voltar ao menu de cadastros
         Digite [2] para continuar ao cadastro de cliente
         
 ********************************************************* 
@@ -88,7 +88,9 @@ def menu_cadastro_cliente():
             email_cliente = input('Digite seu email: ')
             nome_cliente = input('Digite seu nome completo: ') 
             telefone_cliente = input('Digite seu telefone: ')
-            print(f'\n - CLIENTE > {nome_cliente} < CADASTRADO - \n')
+            cursor.execute('INSERT INTO clientes VALUES (null,?,?,?,?)',(cpf_cliente,email_cliente,nome_cliente,telefone_cliente,))
+            conexao_db.commit()
+            print(f'\n - CLIENTE > {nome_cliente} < CADASTRADO!!! - \n')
             menu_cliente()
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
