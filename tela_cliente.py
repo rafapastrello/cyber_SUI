@@ -32,8 +32,6 @@ def menu_cliente():
             # Se não estiver cadastrado no banco de dados, ele recebe a mensagem de "CPF inexistente"
             cpf_cliente = input('\n>>> Informe seu CPF: ')
 
-            print('cpf_cliente: ',cpf_cliente)
-
             cursor.execute('SELECT cpf_cliente FROM clientes WHERE cpf_cliente = ?', (cpf_cliente,))
             verifica_cpf_cliente = cursor.fetchone()
 
