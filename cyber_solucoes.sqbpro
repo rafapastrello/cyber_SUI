@@ -1,15 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/cyberedux/Documents/github-rafa/cyber_solucoes/cyber_solucoes.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1730"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,13:mainadministrador"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE solicitacoes (
-	id_solicitacao INTEGER PRIMARY KEY AUTOINCREMENT,
-	endereco_solicitacao TEXT(150),
-	fk_id_cliente INTEGER(5),
-	fk_id_servico INTEGER(5),
-	
-	FOREIGN KEY (fk_id_cliente) REFERENCES clientes (id_cliente),
-	FOREIGN KEY (fk_id_servico) REFERENCES servicos (id_servico)
-);
-
-CREATE TABLE servicos (
-	id_servico INTEGER PRIMARY KEY AUTOINCREMENT,
-	nome_servico TEXT(50),
-	tipo_servico TEXT(50)
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/cyberedux/Documents/github-rafa/cyber_solucoes/cyber_solucoes.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2139"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,13:mainadministrador"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE &quot;solicitacoes&quot; (
+	&quot;id_solicitacao&quot;	INTEGER,
+	&quot;descricao_solicitacao&quot;	TEXT(150),
+	&quot;endereco_solicitacao&quot;	TEXT(150),
+	&quot;fk_id_cliente&quot;	INTEGER,
+	&quot;fk_id_servico&quot;	INTEGER,
+	PRIMARY KEY(&quot;id_solicitacao&quot; AUTOINCREMENT),
+	FOREIGN KEY(&quot;fk_id_cliente&quot;) REFERENCES &quot;servicos&quot;(&quot;id_servico&quot;),
+	FOREIGN KEY(&quot;endereco_solicitacao&quot;) REFERENCES &quot;clientes&quot;(&quot;id_cliente&quot;)
 );</sql><current_tab id="0"/></tab_sql></sqlb_project>

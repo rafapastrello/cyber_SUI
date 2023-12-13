@@ -8,20 +8,22 @@ cursor = conexao_db.cursor()
 
 def enviar_solicitacao():
     """
-    - Função para exibir o menu principal do arquivo, que possui opções de : [v] Voltar ao menu principal, [1] , [2] ;
+    - Função para exibir o menu de enviar a solicitação do cliente;
     - Não recebe parâmetros;
     - Exemplo de uso:
     >>> menu_solicitacao_cliente():
     """
 
     while True:
+        
+
         opcao = input("""
 *********************************************************
-    _____________________ OPÇÕES ____________________
+    ______________ DADOS DA SOLICITAÇÃO _____________
 
-    [v] .................... Voltar ao menu principal
-    [1] .......................... Enviar solicitação
-    [2] ....................... Consultar solicitação
+    [v] ...................................... Voltar
+    [1] .......................... DESCRICAO solicitação
+    [2] ....................... ENDERECO solicitação
 *********************************************************
 
 >>> Digite a opção: """)
