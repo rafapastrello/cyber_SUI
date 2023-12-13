@@ -9,7 +9,7 @@ cursor = conexao_db.cursor()
 
 def menu_cliente():
     """
-    - Função para verificar se o cliente já está logado ou não, se não estiver logado, ele é redirecionado à função 'menu_cadastro_cliente';
+    - Função para verificar se o cliente já está cadastrado ou não, se não estiver cadastrado, ele é redirecionado à função 'menu_cadastro_cliente';
     - Não recebe parâmetros;
     - Exemplo de uso:
     >>> menu_cliente():
@@ -17,24 +17,31 @@ def menu_cliente():
 
     while True:
         menu = input("""
-*********************************************************
-    _________________ LOGIN CLIENTE _________________
+********************************************************
+    _______________ CADASTRO CLIENTE _______________
 
-        Digite [1] para cliente já logado
-        Digite [2] para cliente sem login
+        Digite [1] para cliente já cadastrado
+        Digite [2] para cliente sem cadastro
         
-********************************************************* 
+******************************************************** 
 
 >>> Digite a opção: """)
         if menu == '1':
-            # Cliente informa que possui cadastro, então digita o CPF para verificarmos se é existente no banco de dados, se não, ele recebe a mensagem de CPF inexistente
+            # Cliente informa que possui cadastro, então digita o CPF para verificarmos se é existente no banco de dados
+            # Se o cliente for existente no banco de dados, ele recebe a mensagem "cadastrado como >Nome do Cliente<" e é redirecionado às funcionalidades de solicitações do usuário
+            # Se não estiver cadastrado no banco de dados, ele recebe a mensagem de "CPF inexistente"
             cpf_cliente = input('\n>>> Informe seu CPF: ')
 
-            verifica_cpf_cliente = cursor.execute('SELECT cpf_cliente FROM clientes WHERE cpf_cliente = ?',(cpf_cliente))
-            nome_cliente_logado = cursor.execute('SELECT nome_cliente FROM clientes WHERE cpf_cliente = ?',(cpf_cliente))
+            print('cpf_cliente: ',cpf_cliente)
+
+            cursor.execute('SELECT cpf_cliente FROM clientes WHERE cpf_cliente = ?', (cpf_cliente,))
+            verifica_cpf_cliente = cursor.fetchone()
+
+            cursor.execute('SELECT nome_cliente FROM clientes WHERE cpf_cliente = ?', (cpf_cliente,))
+            nome_cliente_cadastrado = cursor.fetchone()
 
             if verifica_cpf_cliente != None:
-                print(f'\n - LOGADO COMO > {nome_cliente_logado} < !!! - \n')
+                print(f'\n - CADASTRADO COMO > {nome_cliente_cadastrado} < !!! - \n')
                 menu_solicitacao_cliente()
             else:
                 print('\n - CPF INEXISTENTE!!! - \n')
@@ -69,14 +76,14 @@ def menu_cadastro_cliente():
 *********************************************************
     __________________ CADASTRE-SE __________________
 
-        Digite [1] para voltar ao menu de login
+        Digite [1] para voltar ao menu de cadastramento
         Digite [2] para continuar ao cadastro de cliente
         
 ********************************************************* 
 
 >>> Digite a opção: """)
         if menu == '1':
-            print('\n - VOLTANDO AO MENU DE LOGIN!!! - \n')
+            print('\n - VOLTANDO AO MENU DE CADASTRO!!! - \n')
             break
         elif menu == '2':
             cpf_cliente = input('Digite seu CPF: ')
@@ -114,7 +121,7 @@ def menu_solicitacao_cliente():
             print('\n - ENVIAR SOLICITAÇÃO - \n')
             solicitacoes.enviar_solicitacao()
         elif opcao == '2':
-            print('\n - CONSULTAR SLICITAÇÃO - \n')
+            print('\n - CONSULTAR SOLICITAÇÃO - \n')
             consultar_solicitacao()
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
