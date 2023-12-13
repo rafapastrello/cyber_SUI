@@ -66,9 +66,9 @@ def listar_modificacao_administrador():
 
 def cadastrar_servico_administrador():
     nome_servico = input("Digite o nome do serviço:")
-    tipo_serviço = input("Digite o tipo do serviço:")
+    tipo_servico = input("Digite o tipo do serviço:")
 
-    cursor.execute(" INSERT INTO servico VALUES (NULL,?, ?)",(nome_servico,tipo_serviço))
+    cursor.execute(" INSERT INTO servico VALUES (NULL,?, ?)",(nome_servico,tipo_servico))
     id_servico = cursor.lastrowid
     modificacoes_administrador(id_servico, id_usuario,'cadastrou serviço')
     conexao_db.commit()
