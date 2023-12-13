@@ -169,7 +169,8 @@ def menu_administrador():
     [4] .............. Editar serviço
     [5] .............. Deletar serviço
     [6] .............. Ver histórico     
-    [7] .............. Modificar perfil                    
+    [7] .............. Modificar perfil  
+    [8] .............. Ver rank                  
 ****************************************************
 
 >>> Digite a opção: """)
