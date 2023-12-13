@@ -156,7 +156,11 @@ def visualizar_solicitacoes_administrador():
         
 # Função para ver o rankin
 
-cursor.execute(" SELECT ")
+def rank_soliciação_endereco():
+   cursor.execute(""" SELECT id_solicitacao,nome_cliente,nome_servico,endereco_solicitacao COUNT(nome_servico)  FROM solicitacao
+                    INNER JOIN servico on id_servico = fk_id_servico
+                    INNER JOIN cliente on id_cliente = fk_id_cliente
+                    ORDER BY nome_servico""")
 
 def menu_administrador():
     cadastrar_administrador()
