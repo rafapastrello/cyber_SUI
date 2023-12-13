@@ -95,10 +95,10 @@ def menu_cadastro_cliente():
 
 def menu_solicitacao_cliente():
     """
-    - Função para exibir o menu principal do arquivo, que possui opções de : [v] Voltar ao menu principal, [1] , [2] , [3] ;
+    - Função para exibir o menu principal do arquivo, que possui opções de : [v] Voltar ao menu principal, [1] , [2] ;
     - Não recebe parâmetros;
     - Exemplo de uso:
-    >>> menu_cliente():
+    >>> menu_solicitacao_cliente():
     """
 
     while True:
@@ -120,12 +120,9 @@ def menu_solicitacao_cliente():
             solicitacoes.enviar_solicitacao()
         elif opcao == '2':
             print('\n - CONSULTAR SOLICITAÇÃO - \n')
-            consultar_solicitacao()
+            solicitacoes.consultar_solicitacao()
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
-
-def consultar_solicitacao():
-    pass
 
 if __name__ == '__main__':
     menu_cliente()
