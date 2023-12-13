@@ -8,3 +8,6 @@ cursor = conexao_db.cursor()
 
 def enviar_solicitacao():
     pass
+
+def consultar_solicitacao():
+    pass

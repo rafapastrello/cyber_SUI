@@ -39,7 +39,7 @@ def menu_cliente():
             nome_cliente_cadastrado = cursor.fetchone()
 
             if verifica_cpf_cliente != None:
-                print(f'\n - CADASTRADO COMO > {nome_cliente_cadastrado} < !!! - \n')
+                print(f'\n - CADASTRADO COMO > {nome_cliente_cadastrado[0]} < !!! - \n')
                 menu_solicitacao_cliente()
             else:
                 print('\n - CPF INEXISTENTE!!! - \n')
