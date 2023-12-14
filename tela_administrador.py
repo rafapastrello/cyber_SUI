@@ -130,7 +130,7 @@ def visualizar_servico_administrador():
 
 def obter_solicitacao_administrador():
     # Obter os valores da tabela solicitação
-    solicitacoes.obter_servico_administrador()
+    solicitacoes.obter_solicitacao()
 
 def visualizar_solicitacoes_administrador():
     # Função para visualizar os valores 
@@ -199,7 +199,7 @@ def menu_administrador():
             editar_administrador()
         elif opcao == '8':
             print('\n - RANKING SHOW - \n')
-            rank()
+            rankings.menu_rank()
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 

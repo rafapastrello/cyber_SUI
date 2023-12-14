@@ -24,7 +24,7 @@ Escolha: """)
             rank_solicitacao_local()
 
 def rank_solicitacao_servico():
-    cursor.execute(""" SELECT nome_servico, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacao
+    cursor.execute(""" SELECT nome_servico, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacoes
                     INNER JOIN servico on id_servico = fk_id_servico
                     GROUP BY nome_servico
                     ORDER BY nome_servico DESC""")
