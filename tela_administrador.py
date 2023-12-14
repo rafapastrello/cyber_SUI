@@ -76,7 +76,7 @@ def cadastrar_servico_administrador():
     nome_servico = input("Digite o nome do serviço:")
     tipo_servico = input("Digite o tipo do serviço:")
 
-    cursor.execute(" INSERT INTO servico VALUES (NULL,?, ?)",(nome_servico,tipo_servico))
+    cursor.execute(" INSERT INTO servicos VALUES (NULL,?, ?)",(nome_servico,tipo_servico))
     id_servico = cursor.lastrowid
     modificacoes_administrador(id_servico, id_usuario,'cadastrou serviço')
     conexao_db.commit()
@@ -235,7 +235,7 @@ def menu_administrador():
             visualizar_servico_administrador()
         elif opcao == '3':
             print('\n - CRIAR SERVIÇO - \n')
-            cadastrar_servico_administrador(id_usuario)
+            cadastrar_servico_administrador()
         elif opcao == '4':
             print('\n - EDITAR SERVIÇO - \n')
             editar_servico_administrador()
