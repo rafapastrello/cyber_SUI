@@ -8,8 +8,7 @@ cursor = conexao_db.cursor()
 
 # Obter os valores de serviço
 
-def obter_servico():
-
+def obter_servicos():
     cursor.execute(""" SELECT * FROM servico """)
 
     resultados = cursor.fetchall()
@@ -22,20 +21,19 @@ def obter_servico():
 
 # Listar os valores de serviço
 
-def visualizar_servico():
-    ver_servico = obter_servico()
+def visualizar_servicos():
+    ver_servico = obter_servicos()
     print(f"|{'ID':<3}|{'nome do serviço':<20}|{'tipo de serviço':<20}|")
     print('-'*43)
     for servico in ver_servico:
         print(f"|{servico[0]:<3}|{servico[1]:<20}|{servico[2]:<20}|")
 
-def servico():
- 
- visualizar_servico()
- print('-'*43)
- id_servico = input('Digite o id co serviço que deseja:')
+def servicos():
+    visualizar_servicos()
+    print('-'*43)
+    id_servico = input('Digite o id co serviço que deseja:')
 
- return id_servico
+    return id_servico
 
 if __name__ == '__main__':
-    servico()
+    servicos()
