@@ -11,15 +11,22 @@ cursor = conexao_db.cursor()
 def cadastrar_administrador():
     global id_usuario
 
-    print( " (1) login            (2) Criar conta")
-    print('='*20)
-    entrada = input("escolha:")
+    opcao = input("""
+********************************************************
+    ____________ CADASTRO ADMINISTRADOR ____________
 
-    while( entrada!= '1' and entrada!='2' ):
-        entrada = input("Escolha a alternativa correta:")
+        Digite [1] para administrador já cadastrado
+        Digite [2] para administrador sem cadastro
+        
+******************************************************** 
+
+>>> Digite a opção: """)
+
+    while( opcao!= '1' and opcao!='2' ):
+        opcao = input("Escolha a alternativa correta:")
 
     while True:
-        if (entrada =='1'):
+        if (opcao =='1'):
             email = input("Digite seu email:")
             cursor.execute(f" SELECT * FROM administradores WHERE email_administrador = ? ",(email,))
             resposta = cursor.fetchone()
@@ -30,7 +37,7 @@ def cadastrar_administrador():
             else:
                 print(resposta)
                 print("usuario não encontrado")
-        elif entrada == '2':
+        elif opcao == '2':
             nome = input("Digite seu nome:")
             cpf = input("digite o seu CPF:")
             email = input("digite o seu email:")
