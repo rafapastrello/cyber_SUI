@@ -61,7 +61,7 @@ def editar_administrador():
 # **** MODIFICAÇÕES *****
 
 def modificacoes_administrador():
-    modificacoes.modificacoes()
+    modificacoes.modificacoes(servico,administrador,nome)
 
 def listar_modificacao_administrador():
     modificacoes.listar_modificacao()
