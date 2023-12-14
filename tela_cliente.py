@@ -102,29 +102,7 @@ def menu_solicitacao_cliente():
     - Exemplo de uso:
     >>> menu_solicitacao_cliente():
     """
-
-    while True:
-        opcao = input("""
-*********************************************************
-    _____________________ OPÇÕES ____________________
-
-    [v] .................... Voltar ao menu principal
-    [1] .......................... Enviar solicitação
-    [2] ....................... Consultar solicitação
-*********************************************************
-
->>> Digite a opção: """)
-        if opcao == 'v':
-            print('\n - VOLTANDO AO MENU PRINCIPAL!!! - \n')
-            break
-        elif opcao == '1':
-            print('\n - ENVIAR SOLICITAÇÃO - \n')
-            solicitacoes.enviar_solicitacao()
-        elif opcao == '2':
-            print('\n - CONSULTAR SOLICITAÇÃO - \n')
-            solicitacoes.consultar_solicitacao()
-        else:
-            print('\n - OPÇÃO INVÁLIDA!!! - \n')
+    solicitacoes.menu_solicitacao_cliente()
 
 if __name__ == '__main__':
     menu_cliente()
