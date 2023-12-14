@@ -132,6 +132,9 @@ def obter_servico_administrador():
 def visualizar_servico_administrador():
     ver_servico = obter_servico_administrador()
 
+    print(f"|{'ID':<3}|{'nome do serviço':<20}|{'tipo de serviço':<20}|")
+    print('-'*43)
+
     for servico in ver_servico:
         print(f"|{servico[0]:<3}|{servico[1]:<20}|{servico[2]:<20}|")
 
