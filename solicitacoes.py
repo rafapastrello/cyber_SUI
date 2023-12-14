@@ -37,7 +37,7 @@ def menu_solicitacao_cliente():
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
-def enviar_solicitacao():
+def enviar_solicitacao_cliente():
     """
     - Função para inserir a solicitação do cliente na tabela 'solicitacoes';
     - Não recebe parâmetros;
@@ -65,11 +65,11 @@ def enviar_solicitacao():
             cursor.execute('INSERT INTO solicitacoes VALUES (null,?,?,?,null,null)',(descricao_solicitacao,endereco_solicitacao,status_solicitacao))
             conexao_db.commit()
             print(f'\n - SOLICITAÇÃO FEITA!!! - \n')
-
+            menu_solicitacao_cliente()
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
-def consultar_solicitacao():
+def consultar_solicitacao_cliente():
     """
     - Função para visualizar a solicitação do cliente na tabela 'solicitacoes';
     - Não recebe parâmetros;
@@ -99,6 +99,7 @@ def obter_solicitacao():
         solicitacao = list(resultado)
         solicitacoes.append(solicitacao)
     return solicitacoes
+    conexao_db.commit()
 
 if __name__ == '__main__':
-    consultar_solicitacao()
+    menu_solicitacao_cliente()
