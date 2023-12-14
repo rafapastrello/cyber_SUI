@@ -21,7 +21,7 @@ def cadastrar_administrador():
     while True:
         if (entrada =='1'):
             email = input("Digite seu email:")
-            cursor.execute(f" SELECT * FROM administrador WHERE email_administrador = ? ",(email,))
+            cursor.execute(f" SELECT * FROM administradores WHERE email_administrador = ? ",(email,))
             resposta = cursor.fetchone()
             if resposta:  
                 print("usuario autentificado!")
@@ -35,7 +35,7 @@ def cadastrar_administrador():
             cpf = input("digite o seu CPF:")
             email = input("digite o seu email:")
             telefone = input("digite o seu telefone:")
-            cursor.execute(" INSERT INTO administrador (nome_administrador,cpf_administrador,email_administrador,telefone_administrador) values (?,?,?,?)",(nome,cpf,email,telefone))
+            cursor.execute(" INSERT INTO administradores (nome_administrador,cpf_administrador,email_administrador,telefone_administrador) values (?,?,?,?)",(nome,cpf,email,telefone))
             id_usuario = cursor.lastrowid
             conexao_db.commit()
             break
@@ -46,7 +46,7 @@ def editar_administrador():
     item = input("[1]nome\n[2]email\n[3]telefone\n O que deseja mudar:")
     mudar = input('para que dejesa mudar:')
     dicionario = {'1':'nome_administrador','2':'email_administrador','3':'telefone_administrador'}
-    cursor.execute(f'UPDATE administrador SET {dicionario[item]} =? where id_administrador=?',(mudar,id_usuario))
+    cursor.execute(f'UPDATE administradores SET {dicionario[item]} =? where id_administrador=?',(mudar,id_usuario))
     conexao_db.commit()
 
 
