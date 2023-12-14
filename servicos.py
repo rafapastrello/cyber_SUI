@@ -9,7 +9,7 @@ cursor = conexao_db.cursor()
 # Obter os valores de serviço
 
 def obter_servicos():
-    cursor.execute(""" SELECT * FROM servico """)
+    cursor.execute(""" SELECT * FROM servicos """)
 
     resultados = cursor.fetchall()
     servicos = []
