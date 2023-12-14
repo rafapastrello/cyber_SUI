@@ -1,4 +1,3 @@
-
 import sqlite3
 
 # Cria uma conexão com o banco de dados

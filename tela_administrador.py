@@ -8,8 +8,6 @@ cursor = conexao_db.cursor()
 
 # ***** ADMINISTRADOR  *****
 
-
-
 def cadastrar_administrador():
     global id_usuario
 
