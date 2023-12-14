@@ -6,6 +6,12 @@ conexao_db = sqlite3.connect('cyber_solucoes.db')
 # Cria um cursor para executar comandos SQL
 cursor = conexao_db.cursor()
 
+"""
+- O CLIENTE possui autorização apenas de enviar sua(s) solicitação(ções) e consultar(-las), para verificar o status, por exemplo;
+"""
+
+# ----- TELA DE SOLICITAÇÕES DO > CLIENTE < -----
+
 def menu_solicitacao_cliente():
     """
     - Função para exibir o menu principal do arquivo, que possui opções de : [v] Voltar ao menu principal, [1] , [2] ;

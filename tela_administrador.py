@@ -6,7 +6,7 @@ conexao_db = sqlite3.connect('cyber_solucoes.db')
 # Cria um cursor para executar comandos SQL
 cursor = conexao_db.cursor()
 
-# ***** ADMINISTRADOR  *****
+# ----- TELA ADMINISTRADOR -----
 
 def cadastrar_administrador():
     global id_usuario
@@ -30,7 +30,6 @@ def cadastrar_administrador():
             else:
                 print(resposta)
                 print("usuario não encontrado")
-
         elif entrada == '2':
             nome = input("Digite seu nome:")
             cpf = input("digite o seu CPF:")
@@ -40,6 +39,8 @@ def cadastrar_administrador():
             id_usuario = cursor.lastrowid
             conexao_db.commit()
             break
+        else:
+            print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
 def editar_administrador():
     item = input("[1]nome\n[2]email\n[3]telefone\n O que deseja mudar:")
@@ -51,12 +52,12 @@ def editar_administrador():
 
 # **** MODIFICAÇÕES *****
 
-# Insere os valores em modificação ( Como se fosse um histórico do adminstrador )
 def modificacoes_administrador(servico,administrador,nome):
+    # Insere os valores em modificação ( Como se fosse um histórico do adminstrador )
     cursor.execute(f"INSERT INTO modificacoes VALUES( NULL,?,?,?)",(servico,administrador,nome))
 
-# Lista modificação
 def listar_modificacao_administrador():
+    # Lista modificação
     cursor.execute(""" SELECT id_modificacao,nome_administrador,email_administrador,nome_modificacoes FROM modificacoes 
                 INNER JOIN administradores on fk_id_administrador = id_administrador 
                 INNER JOIN servicos on fk_id_servico = id_servico """)
@@ -67,6 +68,7 @@ def listar_modificacao_administrador():
     for resultado in resultados:
         modificacao = list(resultado)
         print(f"|{modificacao[0]:<3}|{modificacao[1]:<20}|{modificacao[2]:<30}|{modificacao[3]:<20}|")
+
 
 # ***** SERVIÇOS *****
 
@@ -100,8 +102,8 @@ def excluir_servico_administrador():
     print(' ESSE SERVIÇO FOI DELETADO')
     conexao_db.commit()
 
-# obter os valores de serviços
 def obter_servico_administrador():
+    # obter os valores de serviços
     cursor.execute(""" SELECT * FROM servicos """)
 
     resultados = cursor.fetchall()
@@ -122,15 +124,17 @@ def visualizar_servico_administrador():
 
 
 # ***** SOLICITAÇÃO *****
+'''
+- O ADMINISTRADOR possui autorização de visualizar todas as solicitações que foram feitas, editar ou excluir alguma solicitação.
+'''
 
-# Obter os valores da tabela solicitação
 def obter_solicitacao_administrador():
+    # Obter os valores da tabela solicitação
     cursor.execute(""" SELECT id_solicitacao,nome_cliente,email_cliente,nome_servico,tipo_servico,endereco_solicitacao FROM solicitacao
                     INNER JOIN servicos on id_servico = fk_id_servico
                     INNER JOIN clientes on id_cliente = fk_id_cliente  """)
-    
     resultados = cursor.fetchall()
-    
+
     for resultado in resultados:
         solicitacoes = []
         #transforma a tupla em uma lista
@@ -139,19 +143,18 @@ def obter_solicitacao_administrador():
         solicitacoes.append(solicitacao)
         return solicitacoes
 
-# Função para visualizar os valores 
 def visualizar_solicitacoes_administrador():
+    # Função para visualizar os valores 
     ver_solicitacao = obter_servico_administrador()
     print(ver_solicitacao)
     
     print(f"| {'ID':<3} | {'cliente':<20} | {'email':<20} | {'serviço':<20} |{'tipo de serviço':<20} |{'local':<20} |")
     print('='* 130)
+
     for solicitacao in ver_solicitacao:
-        
         print(f"| {solicitacao[0]:<3} | {solicitacao[1]:<20} | {solicitacao[2]:<20} | {solicitacao[3]:<20} |{solicitacao[4]:<20} |{solicitacao[5]:<20} |")
 
 
-        
 # *********** RANK *************
 
 def rank():
@@ -163,7 +166,7 @@ def rank():
         [1] .............. SERVIÇO
         [2] .............. LOCAL"""
         )
-        escolha = input("Escolha:")
+        escolha = input("Escolha: ")
 
         if( escolha =='1'):
             rank_soliciação_servico()
@@ -198,9 +201,8 @@ def rank_soliciação_local():
 
 def menu_administrador():
     cadastrar_administrador()
-
     """
-    - Função para exibir o menu principal do arquivo, que possui opções de : [v] Voltar ao menu principal, [1] , [2] , [3] ;
+    - Função para exibir o menu principal do arquivo;
     - Não recebe parâmetros;
     - Exemplo de uso:
     >>> menu_administrador():
@@ -247,6 +249,7 @@ def menu_administrador():
             print('\n - MODIFICAR PERFIL - \n')
             editar_administrador()
         elif opcao == '8':
+            print('\n - RANKING SHOW - \n')
             rank()
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
