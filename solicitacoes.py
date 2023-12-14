@@ -30,10 +30,10 @@ def menu_solicitacao_cliente():
             break
         elif opcao == '1':
             print('\n - ENVIAR SOLICITAÇÃO - \n')
-            enviar_solicitacao()
+            enviar_solicitacao_cliente()
         elif opcao == '2':
             print('\n - CONSULTAR SOLICITAÇÃO - \n')
-            consultar_solicitacao()
+            consultar_solicitacao_cliente()
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
@@ -42,7 +42,7 @@ def enviar_solicitacao_cliente():
     - Função para inserir a solicitação do cliente na tabela 'solicitacoes';
     - Não recebe parâmetros;
     - Exemplo de uso:
-    >>> enviar_solicitacao():
+    >>> enviar_solicitacao_cliente():
     """
 
     while True:
@@ -74,7 +74,7 @@ def consultar_solicitacao_cliente():
     - Função para visualizar a solicitação do cliente na tabela 'solicitacoes';
     - Não recebe parâmetros;
     - Exemplo de uso:
-    >>> consultar_solicitacao():
+    >>> consultar_solicitacao_cliente():
     """
     ver_solicitacao = obter_solicitacao()
 
