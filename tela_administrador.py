@@ -130,7 +130,7 @@ def visualizar_servico_administrador():
 
 def obter_solicitacao_administrador():
     # Obter os valores da tabela solicitação
-    cursor.execute(""" SELECT id_solicitacao,nome_cliente,email_cliente,nome_servico,tipo_servico,endereco_solicitacao FROM solicitacao
+    cursor.execute(""" SELECT id_solicitacao,nome_cliente,email_cliente,nome_servico,tipo_servico,endereco_solicitacao FROM solicitacoes
                     INNER JOIN servicos on id_servico = fk_id_servico
                     INNER JOIN clientes on id_cliente = fk_id_cliente  """)
     resultados = cursor.fetchall()
@@ -145,8 +145,8 @@ def obter_solicitacao_administrador():
 
 def visualizar_solicitacoes_administrador():
     # Função para visualizar os valores 
-    ver_solicitacao = obter_servico_administrador()
-    print(ver_solicitacao)
+    ver_solicitacao = obter_solicitacao_administrador()
+    
     
     print(f"| {'ID':<3} | {'cliente':<20} | {'email':<20} | {'serviço':<20} |{'tipo de serviço':<20} |{'local':<20} |")
     print('='* 130)

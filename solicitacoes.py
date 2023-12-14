@@ -1,4 +1,5 @@
 import sqlite3
+import servicos
 
 # Cria uma conexão com o banco de dados
 conexao_db = sqlite3.connect('cyber_solucoes.db')
@@ -67,8 +68,11 @@ def enviar_solicitacao_cliente():
         elif opcao == '2':
             descricao_solicitacao = input('Digite a DESCRIÇÃO do problema: ')
             endereco_solicitacao = input('Digite o ENDEREÇO do problema: ')
+            print()
+            id_servico=servicos.servicos() 
+            print()
             status_solicitacao = 'recebido'
-            cursor.execute('INSERT INTO solicitacoes VALUES (null,?,?,?,null,null)',(descricao_solicitacao,endereco_solicitacao,status_solicitacao))
+            cursor.execute('INSERT INTO solicitacoes VALUES (null,?,?,?,null,?)',(descricao_solicitacao,endereco_solicitacao,status_solicitacao,id_servico))
             conexao_db.commit()
             print(f'\n - SOLICITAÇÃO FEITA!!! - \n')
             menu_solicitacao_cliente()
