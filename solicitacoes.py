@@ -31,7 +31,7 @@ def enviar_solicitacao():
             descricao_solicitacao = input('Digite a DESCRICAO do problema: ')
             endereco_solicitacao = input('Digite o ENDERECO do problema: ')
             status_solicitacao = 'recebido'
-            cursor.execute('INSERT INTO clientes VALUES (null,?,?,?,null,null)',(descricao_solicitacao,endereco_solicitacao,status_solicitacao))
+            cursor.execute('INSERT INTO solicitacoes VALUES (null,?,?,?,null,null)',(descricao_solicitacao,endereco_solicitacao,status_solicitacao))
             conexao_db.commit()
             print(f'\n - SOLICITAÇÃO FEITA!!! - \n')
         else:
