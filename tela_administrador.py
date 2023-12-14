@@ -2,7 +2,7 @@ import sqlite3
 import modificacoes
 import solicitacoes
 import rankings
-import servicos
+
 
 # Cria uma conexão com o banco de dados
 conexao_db = sqlite3.connect('cyber_solucoes.db')
