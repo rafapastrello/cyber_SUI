@@ -43,43 +43,33 @@ def cadastrar_administrador():
 
 
 def editar_administrador():
-
     item = input("[1]nome\n[2]email\n[3]telefone\n O que deseja mudar:")
-
     mudar = input('para que dejesa mudar:')
-
     dicionario = {'1':'nome_administrador','2':'email_administrador','3':'telefone_administrador'}
-
     cursor.execute(f'UPDATE administrador SET {dicionario[item]} =? where id_administrador=?',(mudar,id_usuario))
-
     conexao_db.commit()
 
-  
 
 # **** MODIFICAÇÕES *****
 
 # Insere os valores em modificação ( Como se fosse um histórico do adminstrador )
-
 def modificacoes_administrador(servico,administrador,nome):
     cursor.execute(f"INSERT INTO modificacoes VALUES( NULL,?,?,?)",(servico,administrador,nome))
 
 # Lista modificação
-
 def listar_modificacao_administrador():
-    cursor.execute(""" SELECT id_modificacao,nome_administrador, email_administrador, nome_modificacoes FROM modificacoes 
-                INNER JOIN administrador on fk_id_administrador = id_administrador 
-                INNER JOIN servico on fk_id_servico = id_servico """)
-    
+    cursor.execute(""" SELECT id_modificacao,nome_administrador,email_administrador,nome_modificacoes FROM modificacoes 
+                INNER JOIN administradores on fk_id_administrador = id_administrador 
+                INNER JOIN servicos on fk_id_servico = id_servico """)
     resultados = cursor.fetchall()
     
-
     print(f"|{'ID':<3}|{'Nome ':<20}|{'Email do administrador':<30}|{'Modificação':<20}|")
     print('-'*70)
     for resultado in resultados:
         modificacao = list(resultado)
         print(f"|{modificacao[0]:<3}|{modificacao[1]:<20}|{modificacao[2]:<30}|{modificacao[3]:<20}|")
 
-# ***** SERVIÇÕS *****
+# ***** SERVIÇOS *****
 
 def cadastrar_servico_administrador():
     nome_servico = input("Digite o nome do serviço:")
@@ -91,34 +81,29 @@ def cadastrar_servico_administrador():
     conexao_db.commit()
 
 def editar_servico_administrador():
-
     id_servico = input("digite o id do serviço:")
     print('[1] nome\n[2] tipo')
     atributo = input("Qual atributo você dejesa editar:")
     troca = input("Qual dejesa colocar:")
-
     dicionario = {'1':'nome_servico','2':'tipo_servico'}
 
-    cursor.execute(f" UPDATE servico SET {dicionario[atributo]}=? WHERE id_servico = ?", (troca,id_servico))
+    cursor.execute(f" UPDATE servicos SET {dicionario[atributo]}=? WHERE id_servico = ?", (troca,id_servico))
     modificacoes_administrador(id_servico,id_usuario,'editou serviço')
 
     print("ESSE SERVIÇO FOI EDITADO !")
     conexao_db.commit()
 
 def excluir_servico_administrador():
-
     id_servico = input("Digite o id do serviço:")
 
-    cursor.execute(" DELETE FROM servico WHERE id_servico = ?",(id_servico))
+    cursor.execute(" DELETE FROM servicos WHERE id_servico = ?",(id_servico))
     print('-'*50)
     print(' ESSE SERVIÇO FOI DELETADO')
     conexao_db.commit()
 
 # obter os valores de serviços
-
 def obter_servico_administrador():
-
-    cursor.execute(""" SELECT * FROM servico """)
+    cursor.execute(""" SELECT * FROM servicos """)
 
     resultados = cursor.fetchall()
     servicos = []
@@ -144,8 +129,8 @@ def visualizar_servico_administrador():
 
 def obter_solicitacao_administrador():
     cursor.execute(""" SELECT id_solicitacao,nome_cliente,email_cliente,nome_servico,tipo_servico,endereco_solicitacao FROM solicitacao
-                    INNER JOIN servico on id_servico = fk_id_servico
-                    INNER JOIN cliente on id_cliente = fk_id_cliente  """)
+                    INNER JOIN servicos on id_servico = fk_id_servico
+                    INNER JOIN clientes on id_cliente = fk_id_cliente  """)
     
     resultados = cursor.fetchall()
     
@@ -158,7 +143,6 @@ def obter_solicitacao_administrador():
         return solicitacoes
 
 # Função para visualizar os valores 
-    
 def visualizar_solicitacoes_administrador():
     ver_solicitacao = obter_servico_administrador()
     print(ver_solicitacao)
@@ -185,40 +169,35 @@ def rank():
         escolha = input("Escolha:")
 
         if( escolha =='1'):
-           rank_soliciação_servico()
+            rank_soliciação_servico()
         elif(escolha =='2'):
             rank_soliciação_local()
 
 def rank_soliciação_servico():
-     
-     cursor.execute(""" SELECT nome_servico, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacao
+    cursor.execute(""" SELECT nome_servico, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacao
                     INNER JOIN servico on id_servico = fk_id_servico
                     GROUP BY nome_servico
                     ORDER BY nome_servico DESC""")
-   
-     resultados = cursor.fetchall()
-     print(f'|{'serviço':<20}|{'Quantidade de solicitações':<30}|')
-     print('-'*50)
-     for resultado in resultados:
-       servico = list(resultado)
-       print(f'|{servico[0]:<20}|{servico[1]:<30}|')
+
+    resultados = cursor.fetchall()
+    print(f"|{'serviço':<20}|{'Quantidade de solicitações':<30}|")
+    print('-'*50)
+    for resultado in resultados:
+        servico = list(resultado)
+        print(f'|{servico[0]:<20}|{servico[1]:<30}|')
 
 def rank_soliciação_local():
-     
-     cursor.execute(""" SELECT endereco_solicitacao, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacao
-                    INNER JOIN servico on id_servico = fk_id_servico
+    cursor.execute(""" SELECT endereco_solicitacao, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacao
+                    INNER JOIN servicos on id_servico = fk_id_servico
                     GROUP BY endereco_solicitacao
                     ORDER BY endereco_solicitacao DESC""")
-   
-     resultados = cursor.fetchall()
-     print(f'|{'local':<20}|{'Quantidade de solicitações':<30}|')
-     print('-'*50)
-     for resultado in resultados:
-       servico = list(resultado)
-       print(f'|{servico[0]:<20}|{servico[1]:<30}|')
 
-
-
+    resultados = cursor.fetchall()
+    print(f"|{'local':<20}|{'Quantidade de solicitações':<30}|")
+    print('-'*50)
+    for resultado in resultados:
+        servico = list(resultado)
+        print(f'|{servico[0]:<20}|{servico[1]:<30}|')
 
 def menu_administrador():
     cadastrar_administrador()
@@ -270,10 +249,8 @@ def menu_administrador():
         elif opcao == '7':
             print('\n - MODIFICAR PERFIL - \n')
             editar_administrador()
-
         elif opcao == '8':
             rank()
-
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
