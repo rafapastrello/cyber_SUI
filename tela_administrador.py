@@ -8,6 +8,8 @@ cursor = conexao_db.cursor()
 
 # ***** ADMINISTRADOR  *****
 
+
+
 def cadastrar_administrador():
     global id_usuario
 
@@ -153,14 +155,57 @@ def visualizar_solicitacoes_administrador():
     for solicitacao in ver_solicitacao:
         
         print(f"| {solicitacao[0]:<3} | {solicitacao[1]:<20} | {solicitacao[2]:<20} | {solicitacao[3]:<20} |{solicitacao[4]:<20} |{solicitacao[5]:<20} |")
-        
-# Função para ver o rankin
 
-def rank_soliciação_endereco():
-   cursor.execute(""" SELECT id_solicitacao,nome_cliente,nome_servico,endereco_solicitacao COUNT(nome_servico)  FROM solicitacao
+
+        
+# *********** RANK *************
+
+def rank():
+    while True:
+        print(""" ****************************************************
+        __________________ OPÇÕES __________________
+
+        [v] .............. Voltar 
+        [1] .............. SERVIÇO
+        [2] .............. LOCAL"""
+        )
+        escolha = input("Escolha:")
+
+        if( escolha =='1'):
+           rank_soliciação_servico()
+        elif(escolha =='2'):
+            rank_soliciação_local()
+
+def rank_soliciação_servico():
+     
+     cursor.execute(""" SELECT nome_servico, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacao
                     INNER JOIN servico on id_servico = fk_id_servico
-                    INNER JOIN cliente on id_cliente = fk_id_cliente
-                    ORDER BY nome_servico""")
+                    GROUP BY nome_servico
+                    ORDER BY nome_servico DESC""")
+   
+     resultados = cursor.fetchall()
+     print(f'|{'serviço':<20}|{'Quantidade de solicitações':<30}|')
+     print('-'*50)
+     for resultado in resultados:
+       servico = list(resultado)
+       print(f'|{servico[0]:<20}|{servico[1]:<30}|')
+
+def rank_soliciação_local():
+     
+     cursor.execute(""" SELECT endereco_solicitacao, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacao
+                    INNER JOIN servico on id_servico = fk_id_servico
+                    GROUP BY endereco_solicitacao
+                    ORDER BY endereco_solicitacao DESC""")
+   
+     resultados = cursor.fetchall()
+     print(f'|{'local':<20}|{'Quantidade de solicitações':<30}|')
+     print('-'*50)
+     for resultado in resultados:
+       servico = list(resultado)
+       print(f'|{servico[0]:<20}|{servico[1]:<30}|')
+
+
+
 
 def menu_administrador():
     cadastrar_administrador()
@@ -212,14 +257,14 @@ def menu_administrador():
         elif opcao == '7':
             print('\n - MODIFICAR PERFIL - \n')
             listar_modificacao_administrador()
-<<<<<<< HEAD
+
         elif opcao == '8':
-            pass
-=======
+            rank()
+
         elif opcao == '7':
             print('\n - VISUALIZAR RANK - \n')
             ...
->>>>>>> e19ea8a5d9fa069e4442f9497dadc9f955f37247
+
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
