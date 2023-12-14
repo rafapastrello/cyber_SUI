@@ -42,7 +42,19 @@ def cadastrar_administrador():
             id_usuario = cursor.lastrowid
             conexao_db.commit()
             break
-        
+
+
+def editar_administrador():
+
+    item = input("[1]nome\n[2]email\n[3]telefone\n O que deseja mudar:")
+
+    mudar = input('para que dejesa mudar:')
+
+    dicionario = {'1':'nome_administrador','2':'email_administrador','3':'telefone_administrador'}
+
+    cursor.execute(f'UPDATE administrador SET {dicionario[item]} =? where id_administrador=?',(mudar,id_usuario))
+
+    conexao_db.commit()
 
   
 
@@ -61,7 +73,7 @@ def listar_modificacao_administrador():
                 INNER JOIN servico on fk_id_servico = id_servico """)
     
     resultados = cursor.fetchall()
-    print(resultados)
+    
 
     print(f"|{'ID':<3}|{'Nome ':<20}|{'Email do administrador':<30}|{'Modificação':<20}|")
     print('-'*70)
@@ -228,7 +240,7 @@ def menu_administrador():
     [4] .............. Editar serviço
     [5] .............. Deletar serviço
     [6] .............. Ver histórico     
-    [7] .............. Modificar perfil  
+    [7] .............. Modificar cadastro  
     [8] .............. Ver rank                  
 ****************************************************
 
@@ -256,14 +268,10 @@ def menu_administrador():
             ...
         elif opcao == '7':
             print('\n - MODIFICAR PERFIL - \n')
-            listar_modificacao_administrador()
+            editar_administrador()
 
         elif opcao == '8':
             rank()
-
-        elif opcao == '7':
-            print('\n - VISUALIZAR RANK - \n')
-            ...
 
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
