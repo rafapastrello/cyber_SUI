@@ -41,7 +41,6 @@ def cadastrar_administrador():
             conexao_db.commit()
             break
 
-
 def editar_administrador():
     item = input("[1]nome\n[2]email\n[3]telefone\n O que deseja mudar:")
     mudar = input('para que dejesa mudar:')
@@ -122,11 +121,9 @@ def visualizar_servico_administrador():
         print(f"|{servico[0]:<3}|{servico[1]:<20}|{servico[2]:<20}|")
 
 
-#***** SOLICITAÇÃO *****
-
+# ***** SOLICITAÇÃO *****
 
 # Obter os valores da tabela solicitação
-
 def obter_solicitacao_administrador():
     cursor.execute(""" SELECT id_solicitacao,nome_cliente,email_cliente,nome_servico,tipo_servico,endereco_solicitacao FROM solicitacao
                     INNER JOIN servicos on id_servico = fk_id_servico
