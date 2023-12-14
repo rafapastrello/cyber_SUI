@@ -1,5 +1,7 @@
 import sqlite3
 import modificacoes
+import solicitacoes
+import rankings
 
 # Cria uma conexão com o banco de dados
 conexao_db = sqlite3.connect('cyber_solucoes.db')
@@ -127,74 +129,23 @@ def visualizar_servico_administrador():
 
 def obter_solicitacao_administrador():
     # Obter os valores da tabela solicitação
-    cursor.execute(""" SELECT id_solicitacao,nome_cliente,email_cliente,nome_servico,tipo_servico,endereco_solicitacao FROM solicitacao
-                    INNER JOIN servicos on id_servico = fk_id_servico
-                    INNER JOIN clientes on id_cliente = fk_id_cliente  """)
-    resultados = cursor.fetchall()
-
-    for resultado in resultados:
-        solicitacoes = []
-        #transforma a tupla em uma lista
-        solicitacao = list(resultado)
-        #agrupa listas
-        solicitacoes.append(solicitacao)
-        return solicitacoes
+    solicitacoes.obter_servico_administrador()
 
 def visualizar_solicitacoes_administrador():
     # Função para visualizar os valores 
-    ver_solicitacao = obter_servico_administrador()
-    print(ver_solicitacao)
-    
-    print(f"| {'ID':<3} | {'cliente':<20} | {'email':<20} | {'serviço':<20} |{'tipo de serviço':<20} |{'local':<20} |")
-    print('='* 130)
-
-    for solicitacao in ver_solicitacao:
-        print(f"| {solicitacao[0]:<3} | {solicitacao[1]:<20} | {solicitacao[2]:<20} | {solicitacao[3]:<20} |{solicitacao[4]:<20} |{solicitacao[5]:<20} |")
+    solicitacoes.visualizar_solicitacoes_administrador()
 
 
 # *********** RANK *************
 
-def rank():
-    while True:
-        print(""" ****************************************************
-        __________________ OPÇÕES __________________
+def menu_rank():
+    rankings.menu_rank
 
-        [v] .............. Voltar 
-        [1] .............. SERVIÇO
-        [2] .............. LOCAL"""
-        )
-        escolha = input("Escolha: ")
+def rank_solicitacao_servico():
+    rankings.rank_solicitacao_servico
 
-        if( escolha =='1'):
-            rank_soliciação_servico()
-        elif(escolha =='2'):
-            rank_soliciação_local()
-
-def rank_soliciação_servico():
-    cursor.execute(""" SELECT nome_servico, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacao
-                    INNER JOIN servico on id_servico = fk_id_servico
-                    GROUP BY nome_servico
-                    ORDER BY nome_servico DESC""")
-
-    resultados = cursor.fetchall()
-    print(f"|{'serviço':<20}|{'Quantidade de solicitações':<30}|")
-    print('-'*50)
-    for resultado in resultados:
-        servico = list(resultado)
-        print(f'|{servico[0]:<20}|{servico[1]:<30}|')
-
-def rank_soliciação_local():
-    cursor.execute(""" SELECT endereco_solicitacao, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacao
-                    INNER JOIN servicos on id_servico = fk_id_servico
-                    GROUP BY endereco_solicitacao
-                    ORDER BY endereco_solicitacao DESC""")
-
-    resultados = cursor.fetchall()
-    print(f"|{'local':<20}|{'Quantidade de solicitações':<30}|")
-    print('-'*50)
-    for resultado in resultados:
-        servico = list(resultado)
-        print(f'|{servico[0]:<20}|{servico[1]:<30}|')
+def rank_solicitacao_local():
+    rankings.rank_solicitacao_local
 
 def menu_administrador():
     cadastrar_administrador()
