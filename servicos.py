@@ -9,7 +9,7 @@ cursor = conexao_db.cursor()
 # Obter os valores de serviço
 
 def obter_servicos():
-    cursor.execute(""" SELECT * FROM servico """)
+    cursor.execute(""" SELECT * FROM servicos """)
 
     resultados = cursor.fetchall()
     servicos = []
@@ -31,7 +31,7 @@ def visualizar_servicos():
 def servicos():
     visualizar_servicos()
     print('-'*43)
-    id_servico = input('Digite o id co serviço que deseja:')
+    id_servico = input('Digite o id do serviço que deseja:')
 
     return id_servico
 

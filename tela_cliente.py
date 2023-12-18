@@ -16,7 +16,7 @@ def menu_cliente():
     """
 
     while True:
-        menu = input("""
+        opcao = input("""
 ********************************************************
     _______________ CADASTRO CLIENTE _______________
 
@@ -26,7 +26,7 @@ def menu_cliente():
 ******************************************************** 
 
 >>> Digite a opção: """)
-        if menu == '1':
+        if opcao == '1':
             # Cliente informa que possui cadastro, então digita o CPF para verificarmos se é existente no banco de dados
             # Se o cliente for existente no banco de dados, ele recebe a mensagem "cadastrado como >Nome do Cliente<" e é redirecionado às funcionalidades de solicitações do usuário
             # Se não estiver cadastrado no banco de dados, ele recebe a mensagem de "CPF inexistente"
@@ -43,7 +43,7 @@ def menu_cliente():
                 menu_solicitacao_cliente()
             else:
                 print('\n - CPF INEXISTENTE!!! - \n')
-        elif menu == '2':
+        elif opcao == '2':
             # Ao informar que o cliente não possui cadastro, ele decide se quer ser cadastrado ou não
             opcao = input("""
 ***********************************************

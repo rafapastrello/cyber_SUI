@@ -1,4 +1,6 @@
 import sqlite3
+import servicos
+from tela_administrador import obter_servico_administrador
 
 # Cria uma conexão com o banco de dados
 conexao_db = sqlite3.connect('cyber_solucoes.db')
@@ -67,8 +69,11 @@ def enviar_solicitacao_cliente():
         elif opcao == '2':
             descricao_solicitacao = input('Digite a DESCRIÇÃO do problema: ')
             endereco_solicitacao = input('Digite o ENDEREÇO do problema: ')
+            print()
+            id_servico=servicos.servicos() 
+            print()
             status_solicitacao = 'recebido'
-            cursor.execute('INSERT INTO solicitacoes VALUES (null,?,?,?,null,null)',(descricao_solicitacao,endereco_solicitacao,status_solicitacao))
+            cursor.execute('INSERT INTO solicitacoes VALUES (null,?,?,?,null,?)',(descricao_solicitacao,endereco_solicitacao,status_solicitacao,id_servico))
             conexao_db.commit()
             print(f'\n - SOLICITAÇÃO FEITA!!! - \n')
             menu_solicitacao_cliente()
@@ -106,6 +111,41 @@ def obter_solicitacao():
         solicitacoes.append(solicitacao)
     return solicitacoes
     conexao_db.commit()
+
+
+
+
+# ----- TELA DE SOLICITAÇÕES DO > ADMINISTRADOR < -----
+
+'''
+- O ADMINISTRADOR possui autorização de visualizar todas as solicitações que foram feitas, editar ou excluir alguma solicitação.
+'''
+
+def obter_solicitacao_administrador():
+    # Obter os valores da tabela solicitação
+    cursor.execute(""" SELECT id_solicitacao,nome_cliente,email_cliente,nome_servico,tipo_servico,endereco_solicitacao FROM solicitacao
+                    INNER JOIN servicos on id_servico = fk_id_servico
+                    INNER JOIN clientes on id_cliente = fk_id_cliente  """)
+    resultados = cursor.fetchall()
+
+    for resultado in resultados:
+        solicitacoes = []
+        #transforma a tupla em uma lista
+        solicitacao = list(resultado)
+        #agrupa listas
+        solicitacoes.append(solicitacao)
+        return solicitacoes
+
+def visualizar_solicitacoes_administrador():
+    # Função para visualizar os valores 
+    ver_solicitacao = obter_servico_administrador()
+    print(ver_solicitacao)
+    
+    print(f"| {'ID':<3} | {'cliente':<20} | {'email':<20} | {'serviço':<20} |{'tipo de serviço':<20} |{'local':<20} |")
+    print('='* 130)
+
+    for solicitacao in ver_solicitacao:
+        print(f"| {solicitacao[0]:<3} | {solicitacao[1]:<20} | {solicitacao[2]:<20} | {solicitacao[3]:<20} |{solicitacao[4]:<20} |{solicitacao[5]:<20} |")
 
 if __name__ == '__main__':
     menu_solicitacao_cliente()
