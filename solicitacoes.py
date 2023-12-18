@@ -1,9 +1,9 @@
+import tela_cliente
 import sqlite3
 import servicos
-from tela_administrador import obter_servico_administrador
 
 # Cria uma conexão com o banco de dados
-conexao_db = sqlite3.connect('cyber_solucoes.db')
+conexao_db = sqlite3.connect('cyber_sui.db')
 
 # Cria um cursor para executar comandos SQL
 cursor = conexao_db.cursor()
@@ -14,12 +14,12 @@ cursor = conexao_db.cursor()
 
 # ----- TELA DE SOLICITAÇÕES DO > CLIENTE < -----
 
-def menu_solicitacao_cliente():
+def menu_solicitacao_cliente(cpf_cliente):
     """
-    - Função para exibir o menu principal do arquivo, que possui opções de : [v] Voltar ao menu principal, [1] , [2] ;
-    - Não recebe parâmetros;
+    - Função para exibir o menu principal do arquivo, que possui opções de Voltar ao menu principal, enviar ou consultar solicitação;
+    - Recebe 'cpf_cliente' como parâmetro;
     - Exemplo de uso:
-    >>> menu_solicitacao_cliente():
+    >>> menu_solicitacao_cliente(cpf_cliente):
     """
 
     while True:
@@ -38,19 +38,19 @@ def menu_solicitacao_cliente():
             break
         elif opcao == '1':
             print('\n - ENVIAR SOLICITAÇÃO - \n')
-            enviar_solicitacao_cliente()
+            enviar_solicitacao_cliente(cpf_cliente)
         elif opcao == '2':
             print('\n - CONSULTAR SOLICITAÇÃO - \n')
             consultar_solicitacao_cliente()
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
-def enviar_solicitacao_cliente():
+def enviar_solicitacao_cliente(cpf_cliente):
     """
     - Função para inserir a solicitação do cliente na tabela 'solicitacoes';
-    - Não recebe parâmetros;
+    - Recebe 'cpf_cliente' como parâmetro;
     - Exemplo de uso:
-    >>> enviar_solicitacao_cliente():
+    >>> enviar_solicitacao_cliente(cpf_cliente):
     """
 
     while True:
@@ -69,14 +69,14 @@ def enviar_solicitacao_cliente():
         elif opcao == '2':
             descricao_solicitacao = input('Digite a DESCRIÇÃO do problema: ')
             endereco_solicitacao = input('Digite o ENDEREÇO do problema: ')
-            print()
-            id_servico=servicos.servicos() 
-            print()
             status_solicitacao = 'recebido'
-            cursor.execute('INSERT INTO solicitacoes VALUES (null,?,?,?,null,?)',(descricao_solicitacao,endereco_solicitacao,status_solicitacao,id_servico))
+            id_cliente = tela_cliente.obtem_id_cliente(cpf_cliente)
+            tabela_servicos_disponiveis = servicos.visualizar_servicos()
+            id_servico_desejado = input('Digite o ID do serviço desejado: ')
+            cursor.execute('INSERT INTO solicitacoes VALUES (null,?,?,?,?,?)',(descricao_solicitacao,endereco_solicitacao,status_solicitacao,id_cliente,id_servico_desejado,))
             conexao_db.commit()
             print(f'\n - SOLICITAÇÃO FEITA!!! - \n')
-            menu_solicitacao_cliente()
+            menu_solicitacao_cliente(cpf_cliente)
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
@@ -97,9 +97,10 @@ def consultar_solicitacao_cliente():
 
 def obter_solicitacao():
     """
-    Obtem os valores da tabela 'solicitacoes';
-    Não recebe parâmetros;
-    Exemplo de uso:
+    - Obtem os valores da tabela 'solicitacoes';
+    - É usada na função 'consultar_solicitacao_cliente'
+    - Não recebe parâmetros;
+    - Exemplo de uso:
     >>> obter_solicitacao()
     """
     cursor.execute(""" SELECT * FROM solicitacoes """)
@@ -112,40 +113,21 @@ def obter_solicitacao():
     return solicitacoes
     conexao_db.commit()
 
+def visualizar_servico_cliente():
+    """
+    - Visualiza os valores da tabela 'servicos';
+    - É usada na função 'enviar_solicitacao_cliente'
+    - Não recebe parâmetros;
+    - Exemplo de uso:
+    >>> obter_solicitacao()
+    """
+    ver_servico = servicos.obter_servicos()
 
+    print(f"|{'ID':<3}|{'nome do serviço':<30}|{'tipo de serviço':<40}|")
+    print('-'*60)
 
-
-# ----- TELA DE SOLICITAÇÕES DO > ADMINISTRADOR < -----
-
-'''
-- O ADMINISTRADOR possui autorização de visualizar todas as solicitações que foram feitas, editar ou excluir alguma solicitação.
-'''
-
-def obter_solicitacao_administrador():
-    # Obter os valores da tabela solicitação
-    cursor.execute(""" SELECT id_solicitacao,nome_cliente,email_cliente,nome_servico,tipo_servico,endereco_solicitacao FROM solicitacao
-                    INNER JOIN servicos on id_servico = fk_id_servico
-                    INNER JOIN clientes on id_cliente = fk_id_cliente  """)
-    resultados = cursor.fetchall()
-
-    for resultado in resultados:
-        solicitacoes = []
-        #transforma a tupla em uma lista
-        solicitacao = list(resultado)
-        #agrupa listas
-        solicitacoes.append(solicitacao)
-        return solicitacoes
-
-def visualizar_solicitacoes_administrador():
-    # Função para visualizar os valores 
-    ver_solicitacao = obter_servico_administrador()
-    print(ver_solicitacao)
-    
-    print(f"| {'ID':<3} | {'cliente':<20} | {'email':<20} | {'serviço':<20} |{'tipo de serviço':<20} |{'local':<20} |")
-    print('='* 130)
-
-    for solicitacao in ver_solicitacao:
-        print(f"| {solicitacao[0]:<3} | {solicitacao[1]:<20} | {solicitacao[2]:<20} | {solicitacao[3]:<20} |{solicitacao[4]:<20} |{solicitacao[5]:<20} |")
+    for servico in ver_servico:
+        print(f"|{servico[0]:<3}|{servico[1]:<30}|{servico[2]:<40}|")
 
 if __name__ == '__main__':
     menu_solicitacao_cliente()

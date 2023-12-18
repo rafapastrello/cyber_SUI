@@ -14,17 +14,17 @@ def menu_principal():
 
     while True:
         opcao = input("""
-            ------------- CYBER SOLUÇÕES ---------------
-             ******************************************
-               ----------- MENU PRINCIPAL -----------
+            CYBER SUI - Soluções Urbanas Integradas
+            =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+            ___________ MENU PRINCIPAL ____________
     
-                [s] ............... ENCERRAR SISTEMA
-                [1] ........................ Cliente
-                [2] .................. Administrador
+            [s] .................. ENCERRAR SISTEMA
+            [1] ........................... Cliente
+            [2] ..................... Administrador
 
-            ********************************************
+            ***************************************
                 
-            >>> Digite seu estado(cliente/administrador): """)
+            >>> Digite seu estado(cliente/adm): """)
 
         if opcao == 's':
             print('\n - PROGRAMA ENCERRADO COM SUCESSO! - \n')
