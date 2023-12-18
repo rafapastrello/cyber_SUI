@@ -42,6 +42,71 @@ def cadastrar_administrador():
         else:
             print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
+def menu_administrador():
+    cadastrar_administrador()
+    """
+    - Função para exibir o menu principal do arquivo;
+    - Não recebe parâmetros;
+    - Exemplo de uso:
+    >>> menu_administrador():
+    """
+    while True:
+        opcao = input("""
+****************************************************
+    __________________ OPÇÕES __________________
+
+    [v] .............. Voltar ao menu principal
+    
+    [1] .............. Visualizar serviços
+    [2] .............. Criar serviço
+    [3] .............. Editar serviço
+    [4] .............. Deletar serviço
+    [5] .............. Ver histórico     
+    [6] .............. Modificar cadastro  
+    [7] .............. Ver rank 
+    [8] .............. Visualizar solicitações
+    [9] .............. Editar solicitação 
+    [10] ............. Excluir solicitação  
+
+****************************************************
+
+>>> Digite a opção: """)
+        if opcao == 'v':
+            print('\n - VOLTANDO AO MENU PRINCIPAL!!! - \n')
+            break
+        elif opcao == '1':
+            print('\n - VISUALIZAR SERVIÇOS - \n')
+            visualizar_servico_administrador()
+        elif opcao == '2':
+            print('\n - CRIAR SERVIÇO - \n')
+            cadastrar_servico_administrador()
+        elif opcao == '3':
+            print('\n - EDITAR SERVIÇO - \n')
+            editar_servico_administrador()
+        elif opcao == '4':
+            print('\n - DELETAR SERVIÇO - \n')
+            excluir_servico_administrador()
+        elif opcao == '5':
+            print('\n - VISUALIZAR HISTÓRICO - \n')
+            listar_modificacao_administrador()
+        elif opcao == '6':
+            print('\n - MODIFICAR PERFIL - \n')
+            editar_administrador()
+        elif opcao == '7':
+            print('\n - RANKING SHOW - \n')
+            rank()
+        elif opcao == '8':
+            print('\n - VISUALIZAR SOLICITAÇÕES - \n')
+            visualizar_solicitacoes_administrador()
+        elif opcao == '9':
+            print('\n - EDITAR SOLICITAÇÕES - \n')
+            editar_solicitacoes_status()
+        elif opcao == '10':
+            print('\n - DELETAR SOLICITAÇÕES - \n')
+            deletar_solicitacoes()
+        else:
+            print('\n - OPÇÃO INVÁLIDA!!! - \n')
+
 def editar_administrador():
     item = input("[1]nome\n[2]email\n[3]telefone\n O que deseja mudar:")
     mudar = input('para que dejesa mudar:')
@@ -218,72 +283,6 @@ def rank_soliciação_local():
     for resultado in resultados:
         servico = list(resultado)
         print(f'|{servico[0]:<30}|{servico[1]:<40}|')
-
-def menu_administrador():
-    cadastrar_administrador()
-    """
-    - Função para exibir o menu principal do arquivo;
-    - Não recebe parâmetros;
-    - Exemplo de uso:
-    >>> menu_administrador():
-    """
-    while True:
-        opcao = input("""
-****************************************************
-    __________________ OPÇÕES __________________
-
-    [v] .............. Voltar ao menu principal
-    
-    [1] .............. Visualizar serviços
-    [2] .............. Criar serviço
-    [3] .............. Editar serviço
-    [4] .............. Deletar serviço
-    [5] .............. Ver histórico     
-    [6] .............. Modificar cadastro  
-    [7] .............. Ver rank 
-    [8] .............. Visualizar solicitações
-    [9] .............. Editar solicitação 
-    [10] ..............Excluir solicitação  
-
-****************************************************
-
->>> Digite a opção: """)
-        if opcao == 'v':
-            print('\n - VOLTANDO AO MENU PRINCIPAL!!! - \n')
-            break
-        elif opcao == '1':
-            print('\n - VISUALIZAR SERVIÇOS - \n')
-            visualizar_servico_administrador()
-        elif opcao == '2':
-            print('\n - CRIAR SERVIÇO - \n')
-            cadastrar_servico_administrador()
-        elif opcao == '3':
-            print('\n - EDITAR SERVIÇO - \n')
-            editar_servico_administrador()
-        elif opcao == '4':
-            print('\n - DELETAR SERVIÇO - \n')
-            excluir_servico_administrador()
-        elif opcao == '5':
-            print('\n - VISUALIZAR HISTÓRICO - \n')
-            listar_modificacao_administrador()
-        elif opcao == '6':
-            print('\n - MODIFICAR PERFIL - \n')
-            editar_administrador()
-            
-        elif opcao == '7':
-            print('\n - RANKING SHOW - \n')
-            rank()
-        elif opcao == '8':
-            print('\n - VISUALIZAR SOLICITAÇÕES - \n')
-            visualizar_solicitacoes_administrador()
-        elif opcao == '9':
-            print('\n - EDITAR SOLICITAÇÕES - \n')
-            editar_solicitacoes_status()
-        elif opcao == '10':
-            print('\n - DELETAR SOLICITAÇÕES - \n')
-            deletar_solicitacoes()
-        else:
-            print('\n - OPÇÃO INVÁLIDA!!! - \n')
 
 if __name__ == '__main__':
     menu_administrador()
