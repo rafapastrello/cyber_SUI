@@ -21,7 +21,7 @@ def cadastrar_administrador():
     while True:
         if (entrada =='1'):
             email = input("Digite seu email:")
-            cursor.execute(f" SELECT * FROM administrador WHERE email_administrador = ? ",(email,))
+            cursor.execute(f" SELECT * FROM administradores WHERE email_administrador = ? ",(email,))
             resposta = cursor.fetchone()
             if resposta:  
                 print("usuario autentificado!")
@@ -35,7 +35,7 @@ def cadastrar_administrador():
             cpf = input("digite o seu CPF:")
             email = input("digite o seu email:")
             telefone = input("digite o seu telefone:")
-            cursor.execute(" INSERT INTO administrador (nome_administrador,cpf_administrador,email_administrador,telefone_administrador) values (?,?,?,?)",(nome,cpf,email,telefone))
+            cursor.execute(" INSERT INTO administradores (nome_administrador,cpf_administrador,email_administrador,telefone_administrador) values (?,?,?,?)",(nome,cpf,email,telefone))
             id_usuario = cursor.lastrowid
             conexao_db.commit()
             break
@@ -46,7 +46,7 @@ def editar_administrador():
     item = input("[1]nome\n[2]email\n[3]telefone\n O que deseja mudar:")
     mudar = input('para que dejesa mudar:')
     dicionario = {'1':'nome_administrador','2':'email_administrador','3':'telefone_administrador'}
-    cursor.execute(f'UPDATE administrador SET {dicionario[item]} =? where id_administrador=?',(mudar,id_usuario))
+    cursor.execute(f'UPDATE administradores SET {dicionario[item]} =? where id_administrador=?',(mudar,id_usuario))
     conexao_db.commit()
 
 
@@ -76,7 +76,7 @@ def cadastrar_servico_administrador():
     nome_servico = input("Digite o nome do serviço:")
     tipo_servico = input("Digite o tipo do serviço:")
 
-    cursor.execute(" INSERT INTO servico VALUES (NULL,?, ?)",(nome_servico,tipo_servico))
+    cursor.execute(" INSERT INTO servicos VALUES (NULL,?, ?)",(nome_servico,tipo_servico))
     id_servico = cursor.lastrowid
     modificacoes_administrador(id_servico, id_usuario,'cadastrou serviço')
     conexao_db.commit()
@@ -130,7 +130,7 @@ def visualizar_servico_administrador():
 
 def obter_solicitacao_administrador():
     # Obter os valores da tabela solicitação
-    cursor.execute(""" SELECT id_solicitacao,nome_cliente,email_cliente,nome_servico,tipo_servico,endereco_solicitacao FROM solicitacao
+    cursor.execute(""" SELECT id_solicitacao,nome_cliente,email_cliente,nome_servico,tipo_servico,endereco_solicitacao FROM solicitacoes
                     INNER JOIN servicos on id_servico = fk_id_servico
                     INNER JOIN clientes on id_cliente = fk_id_cliente  """)
     resultados = cursor.fetchall()
@@ -174,8 +174,8 @@ def rank():
             rank_soliciação_local()
 
 def rank_soliciação_servico():
-    cursor.execute(""" SELECT nome_servico, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacao
-                    INNER JOIN servico on id_servico = fk_id_servico
+    cursor.execute(""" SELECT nome_servico, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacoes
+                    INNER JOIN servicos on id_servico = fk_id_servico
                     GROUP BY nome_servico
                     ORDER BY nome_servico DESC""")
 
@@ -187,7 +187,7 @@ def rank_soliciação_servico():
         print(f'|{servico[0]:<20}|{servico[1]:<30}|')
 
 def rank_soliciação_local():
-    cursor.execute(""" SELECT endereco_solicitacao, COUNT(id_solicitacao)  AS quandidade_soliciacoes FROM solicitacao
+    cursor.execute(""" SELECT endereco_solicitacao, COUNT(id_solicitacao) AS quandidade_soliciacoes FROM solicitacoes
                     INNER JOIN servicos on id_servico = fk_id_servico
                     GROUP BY endereco_solicitacao
                     ORDER BY endereco_solicitacao DESC""")
