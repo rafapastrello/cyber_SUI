@@ -110,6 +110,3 @@ def obtem_id_cliente(cpf_cliente):
     cursor.execute("SELECT id_cliente FROM clientes WHERE cpf_cliente = ?", (cpf_cliente,))
     id_cliente = cursor.fetchone()  # Obtém o ID do cliente, filtrado pelo CPF que foi informado pelo cliente
     return id_cliente[0]
-
-if __name__ == '__main__':
-    menu_cliente()

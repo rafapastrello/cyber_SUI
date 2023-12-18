@@ -119,7 +119,7 @@ def editar_administrador():
 
 def modificacoes_administrador(servico,administrador,nome):
     # Insere os valores em modificação ( Como se fosse um histórico do adminstrador )
-    cursor.execute(f"INSERT INTO modificacoes VALUES( NULL,?,?,?)",(administrador,servico,nome))
+    cursor.execute(f"INSERT INTO modificacoes VALUES(NULL,?,?,?)",(administrador,servico,nome))
 
 def listar_modificacao_administrador():
     # Lista modificação
@@ -283,6 +283,3 @@ def rank_soliciação_local():
     for resultado in resultados:
         servico = list(resultado)
         print(f'|{servico[0]:<30}|{servico[1]:<40}|')
-
-if __name__ == '__main__':
-    menu_administrador()
