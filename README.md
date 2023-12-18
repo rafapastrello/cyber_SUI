@@ -1,4 +1,5 @@
-# SUI - Sistema de Solicitações Urbanas Integradas
+# Cyber_SUI
+### Solicitações Urbanas Integradas
 
 Repositório oficial do Sistema de Solicitações Urbanas Integradas (SUI). Este projeto em desenvolvimento tem como objetivo simplificar a interação dos cidadãos com a gestão urbana, permitindo que eles registrem solicitações e reclamações relacionadas a serviços na cidade. O sistema visa melhorar a qualidade de vida dos cidadãos, proporcionando uma maneira eficiente de reportar e resolver problemas urbanos.
 
